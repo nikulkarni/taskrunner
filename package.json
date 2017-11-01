@@ -1,0 +1,32 @@
+{
+  "name": "taskrunner-exercise",
+  "version": "1.0.0",
+  "description": "For this exercise, you will implement a task dispatcher. The dispatcher will run as a service that allows the scheduling and monitoring of a set of tasks, and retrieval of their results.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/videoplayer-continuous-delivery/taskrunner-exercise.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/videoplayer-continuous-delivery/taskrunner-exercise/issues"
+  },
+  "homepage": "https://github.com/videoplayer-continuous-delivery/taskrunner-exercise#readme",
+  "dependencies": {
+    "async": "^2.5.0",
+    "body-parser": "^1.18.2",
+    "confit": "^2.2.1",
+    "debug": "^3.1.0",
+    "express": "^4.16.2",
+    "uuid": "^3.1.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "jshint": "^2.9.5",
+    "mocha": "^4.0.1"
+  }
+}

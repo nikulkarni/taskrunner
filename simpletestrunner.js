@@ -110,7 +110,7 @@ if (testSuite === undefined) {
   }, '');
   console.log(usage + '\navailable test suites:\n\t' + testSuiteList);
 } else if (testSuites[testSuite] === undefined) {
-  console.log(`${scriptName}: test suite 'testSuite' not recongnized`);
+  console.log(`${scriptName}: test suite ${testSuite} not recongnized`);
 } else {
   testSuites[testSuite].run();  
 }
