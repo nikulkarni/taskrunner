@@ -101,8 +101,7 @@ A POST (/task) with request body `{"action": "cancel","id": "123"}`, indicating 
 
 ```bash
 curl -X POST -H "Content-Type: application/json" 
--d '{"action": "cancel",
-"id": "aacfa380-bfe5-11e7-a8ba-b5bf1476d6a8"}' 
+-d '{"action": "cancel", "id": "aacfa380-bfe5-11e7-a8ba-b5bf1476d6a8"}' 
 "https://tdispatcher.herokuapp.com/task"
 ```
 This will output below. Now the status is `cancelled`, including its `runtime`. Since the suite was `cancelled` before it could complete, the `passed`, `failed`, `runtime` and `failedTests` would still be default 
