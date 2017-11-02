@@ -120,9 +120,9 @@ This will output below. Now the status is `cancelled`, including its `runtime`. 
 If users try to cancel an already cancelled suite, there will be a validation error
 
 ## Tests
-  Unit tests reside under `test/unit` and can be run by `npm test`
-  Functional tests reside under `test/functional` and can be run by `npm run verify`
-  Linting can be run by `npm run jshint`  
+  - Unit tests reside under `test/unit` and can be run by `npm test`
+  - Functional tests reside under `test/functional` and can be run by `npm run verify`
+  - Linting can be run by `npm run jshint`  
 
 ## Problem statement
 For this exercise, you will implement a task dispatcher. The dispatcher will run as a service that allows the scheduling and monitoring of a set of tasks, and retrieval of their results.
