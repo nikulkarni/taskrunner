@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha test/unit/*.js -t 120s",
-    "verify": "mocha test/functional/*.js -t 120s"
+    "verify": "mocha test/functional/*.js -t 120s",
+    "start" : "DEBUG=taskrunner* node index"
   },
   "repository": {
     "type": "git",
