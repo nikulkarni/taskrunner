@@ -1,14 +1,16 @@
 # Task Dispatcher
-Dispatcher runs as a RESTful server for scheduling and monitoring a set of tasks
+Dispatcher runs as a RESTful server for scheduling and monitoring a set of tasks 
 
 ## Setup
-This is a node.js project and tested on node (v6.11.5) and npm (5.4.2)
+This is a node.js project and tested on node (v6.11.5) and npm (5.4.2). This project is hosted on heroko and already running `tdispatcher.herokuapp.com`. 
+
+If you want to run it locally
 
 ```bash
 npm install
 ```
 
-Server can be started with
+Server can be started with (DEBUG will print verbose logs)
 ```bash
 DEBUG=taskrunner* node index
 ```
@@ -38,13 +40,30 @@ A GET (/task/status/:id), this api requires the run id
 curl -X GET "https://tdispatcher.herokuapp.com/task/status/40efd3b0-bfe3-11e7-a1a2-3512b673684b"
 ```
 
-This will output below, indicating the id of the run, suite name and status. Since the suite is `running`, the `passed`, `failed` and `failedTests` would still be default 
+This will output below, indicating the id of the run, suite name and status. Since the suite is still `running`, the `passed`, `failed`, `runtime` and `failedTests` would still be default 
 
-{"id":"40efd3b0-bfe3-11e7-a1a2-3512b673684b","testSuite":"testSuite4","status":"running","runtime":30.460770422,"passed":0,"failed":0,"failedTests":[]}
-
+```javascript
+{
+  "id": "40efd3b0-bfe3-11e7-a1a2-3512b673684b",
+  "testSuite": "testSuite4",
+  "status": "running",
+  "runtime": 30.460770422,
+  "passed": 0,
+  "failed": 0,
+  "failedTests": [
+    
+  ]
+}
+```
 ### Get the status of a completed test run
 
-Similar to
+Similar to above GET (/task/status/:id) can be used to get the status of a completed suite. 
+
+```bash
+curl -X GET "https://tdispatcher.herokuapp.com/task/status/c62563b0-bfe3-11e7-a1a2-3512b673684b"
+```
+
+Since now the suite is `completed`, the `passed`, `failed`, `runtime` and `failedTests` would be populated with appropriate values
 
 ```javascript
    {
@@ -63,7 +82,34 @@ Similar to
        "RecalcSocialGraphFullUserTable"
      ]
    }
-   ```
+```
+For any invalid id, or any invalid action (apart from run/cancel), validation error will be returned
+    
+### Cancel an active test run
+A POST (/task) with request body `{"action": "cancel","id": "123"}`, indicating the action is to `cancel` the suite with id `123`. For example
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"action": "cancel","id": "aacfa380-bfe5-11e7-a8ba-b5bf1476d6a8"}' "https://tdispatcher.herokuapp.com/task"
+```
+This will output below. Now the status is `cancelled`, including its `runtime`. Since the suite was `cancelled` before it could complete, the `passed`, `failed`, `runtime` and `failedTests` would still be default 
+
+```javascript
+{
+  "id": "aacfa380-bfe5-11e7-a8ba-b5bf1476d6a8",
+  "testSuite": "testSuite4",
+  "status": "cancelled",
+  "runtime": 19.088165634,
+  "passed": 0,
+  "failed": 0,
+  "failedTests": []
+}
+```
+If users try to cancel an already cancelled suite, there will be a validation error
+
+## Tests
+  Unit tests reside under `test/unit` and can be run by `npm test`
+  Functional tests reside under `test/functional` and can be run by `npm run verify`
+  Linting can be run by `npm run jshint`  
 
 ## Problem statement
 For this exercise, you will implement a task dispatcher. The dispatcher will run as a service that allows the scheduling and monitoring of a set of tasks, and retrieval of their results.
