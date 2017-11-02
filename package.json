@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha test/unit/*.js -t 120s",
     "verify": "mocha test/functional/*.js -t 120s",
-    "start": "DEBUG=taskrunner* node index"
+    "start": "DEBUG=taskrunner* node index",
+    "jshint" : "jshint index.js ./server/index.js ./lib/*.js"
   },
   "repository": {
     "type": "git",
