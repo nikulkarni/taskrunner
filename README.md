@@ -23,13 +23,24 @@ DEBUG=taskrunner* node index
 A POST (/task) with request body `{"action": "run","testSuite": "testSuite4"}`, indicating the action is to `run` the suite `testSuite4` 
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{"action": "run","testSuite": "testSuite4"}' "https://tdispatcher.herokuapp.com/task"
+curl -X POST -H "Content-Type: application/json" -d '{"action": "run","testSuite": "testSuite4"}' 
+"https://tdispatcher.herokuapp.com/task"
 ```
 
 This will output below, indicating the id of the run, suite name and status. At the beginning, `runtime`, `passed`, `failed` and `failedTests` would be default values
 
-```bash
-{"id":"87d4bdf0-bfe2-11e7-a1a2-3512b673684b","testSuite":"testSuite4","status":"running","runtime":"0","passed":0,"failed":0,"failedTests":[]}
+```javascript
+{
+  "id": "87d4bdf0-bfe2-11e7-a1a2-3512b673684b",
+  "testSuite": "testSuite4",
+  "status": "running",
+  "runtime": "0",
+  "passed": 0,
+  "failed": 0,
+  "failedTests": [
+    
+  ]
+}
 ```
 
 ### Get the status of a test run
@@ -89,7 +100,9 @@ For any invalid id, or any invalid action (apart from run/cancel), validation er
 A POST (/task) with request body `{"action": "cancel","id": "123"}`, indicating the action is to `cancel` the suite with id `123`. For example
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{"action": "cancel","id": "aacfa380-bfe5-11e7-a8ba-b5bf1476d6a8"}' "https://tdispatcher.herokuapp.com/task"
+curl -X POST -H "Content-Type: application/json" 
+-d '{"action": "cancel", "id": "aacfa380-bfe5-11e7-a8ba-b5bf1476d6a8"}' 
+"https://tdispatcher.herokuapp.com/task"
 ```
 This will output below. Now the status is `cancelled`, including its `runtime`. Since the suite was `cancelled` before it could complete, the `passed`, `failed`, `runtime` and `failedTests` would still be default 
 
@@ -107,9 +120,9 @@ This will output below. Now the status is `cancelled`, including its `runtime`. 
 If users try to cancel an already cancelled suite, there will be a validation error
 
 ## Tests
-  Unit tests reside under `test/unit` and can be run by `npm test`
-  Functional tests reside under `test/functional` and can be run by `npm run verify`
-  Linting can be run by `npm run jshint`  
+  - Unit tests reside under `test/unit` and can be run by `npm test`
+  - Functional tests reside under `test/functional` and can be run by `npm run verify`
+  - Linting can be run by `npm run jshint`  
 
 ## Problem statement
 For this exercise, you will implement a task dispatcher. The dispatcher will run as a service that allows the scheduling and monitoring of a set of tasks, and retrieval of their results.
